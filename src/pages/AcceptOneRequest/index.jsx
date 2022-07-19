@@ -2,17 +2,17 @@ import React from "react";
 import "./style.css";
 import AuthNavbar from "../../components/AuthNavbar";
 import { ReactComponent as Mastercard } from "./images/Mastercard.svg";
-import Modal from "../../components/IncomingRequestModal";
+// import IncomingRequestModal from "../../components/IncomingRequestModal";
+// import RequestAcceptedModal from "../../components/RequestAccepedModal";
 
 const AcceptOneRequest = () => {
-
-
   return (
     <>
-      <button>Open</button>
-      <Modal />
+      {/* <IncomingRequestModal /> */}
+      {/* <RequestAcceptedModal /> */}
+
       <AuthNavbar />
-      <div className="container">
+      <div className="acceptone-container">
         <div className="accept-one-left">
           <div className="request-details">
             <h4>Request details</h4>
@@ -62,9 +62,7 @@ const AcceptOneRequest = () => {
           </div>
         </div>
 
-        <div className="accept-one-right">
-          
-        </div>
+        <div className="accept-one-right"></div>
       </div>
     </>
   );

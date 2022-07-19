@@ -10,24 +10,25 @@ import { basicSchema } from "../../schemas";
 import { Link } from "react-router-dom";
 
 const onSubmit = (values, actions) => {
+  let formData = new FormData();
+  formData.append("name", values.name);
+  formData.append("email", values.email);
+  formData.append("phoneNum", values.phonenumber);
+  formData.append("password", values.password);
+  formData.append("city", values.city);
+  formData.append("bikeDocument", values.bikedocument);
+  formData.append("passport_photo", values.passportphoto);
+  formData.append("valid_IdCard", values.valididcard);
+  formData.append("user_type", "rider");
+
   Axios.post(
-    "https://dispatch-buddy.herokuapp.com/api-docs/#/auth/createuser",
-    {
-      email: values.email,
-      password: values.password,
-      name: values.name,
-      phoneNum: values.phonenumber,
-      city: values.city,
-      usertype: "rider",
-      bikedocument: values.bikedocument,
-      passportphoto: values.passportphoto,
-      valididcard: values.valididcard,
-    }
+    "https://dispatch-buddy-api.herokuapp.com/api/v1/auth/user/create",
+    formData
   ).then((response) => {
     actions.resetForm();
     console.log(response);
-    if (response.status === 200) {
-      toast("You Have Successfully Registered!", {
+    if (response.status === 201) {
+      toast(response.data.msg, {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -53,6 +54,7 @@ const RiderSignup = () => {
     handleBlur,
     handleChange,
     handleSubmit,
+    setFieldValue,
   } = useFormik({
     initialValues: {
       email: "",
@@ -60,16 +62,16 @@ const RiderSignup = () => {
       name: "",
       phonenumber: "",
       city: "",
-      usertype: "",
       bikedocument: "",
       passportphoto: "",
       valididcard: "",
+      user_type: "rider",
     },
     validationSchema: basicSchema,
     onSubmit,
   });
 
-  console.log(errors);
+  console.log(values);
 
   return (
     <div className="rider-signup">
@@ -156,25 +158,14 @@ const RiderSignup = () => {
             <div className="error">{errors.city}</div>
           )}
 
-          {/* <label for="user_type">User_type</label>
-          <input
-            value={values.usertype}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            className={errors.usertype && touched.usertype ? "input-error" : ""}
-            type="text"
-            id="usertype"
-            name="usertype"
-            placeholder="Enter user type"
-          />
-          {errors.usertype && touched.usertype && <small className="error">{errors.usertype}</small>} */}
-
           <label>Bike Documents</label>
           <div className="document-wrapper">
             Upload
             <input
-              onChange={handleChange}
-              value={values.bikedocument}
+              onChange={(event) => {
+                setFieldValue("bikedocument", event.currentTarget.files[0]);
+              }}
+              value={undefined}
               onBlur={handleBlur}
               className={
                 errors.bikedocument && touched.bikedocument ? "input-error" : ""
@@ -192,8 +183,10 @@ const RiderSignup = () => {
           <div className="document-wrapper">
             Upload
             <input
-              onChange={handleChange}
-              value={values.valididcard}
+              onChange={(event) => {
+                setFieldValue("valididcard", event.currentTarget.files[0]);
+              }}
+              value={undefined}
               onBlur={handleBlur}
               className={
                 errors.valididcard && touched.valididcard ? "input-error" : ""
@@ -211,8 +204,10 @@ const RiderSignup = () => {
           <div className="document-wrapper">
             Upload
             <input
-              onChange={handleChange}
-              value={values.passportphoto}
+              onChange={(event) => {
+                setFieldValue("passportphoto", event.currentTarget.files[0]);
+              }}
+              value={undefined}
               onBlur={handleBlur}
               className={
                 errors.passportphoto && touched.passportphoto
