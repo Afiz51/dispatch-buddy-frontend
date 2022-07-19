@@ -1,6 +1,7 @@
 import React from "react";
 import emailTick from "./images/email-tick.png";
 import { useLocation, Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import axios from "axios";
 import "./verifyEmail.css";
 
@@ -21,11 +22,21 @@ const VerifyEmail = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = await axios.post(url, {
-      verificationToken: token,
-      email: email,
-    });
-    console.log(data);
+
+    try {
+      const data = await axios.post(url, {
+        verificationToken: token,
+        email: email,
+      });
+      console.log(data.data);
+      if (data.status === 200) {
+        toast.success("Email verified successfully. You can now login");
+      } else {
+      }
+    } catch (error) {
+      toast.error("Verification failed");
+      console.log("error: ", error);
+    }
   };
   return (
     <div>
@@ -45,7 +56,12 @@ const VerifyEmail = () => {
             Verify Email
           </button>
           <Link to="/user-signin">
-            <button className="return-to-LoginPage">Return to Login</button>
+            <button
+              className="return-to-LoginPage"
+              style={{ cursor: "pointer" }}
+            >
+              Return to Login
+            </button>
           </Link>
         </div>
       </div>

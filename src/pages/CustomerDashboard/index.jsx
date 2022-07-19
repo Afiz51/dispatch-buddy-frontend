@@ -4,6 +4,7 @@ import { ReactComponent as OrderComplete } from "./images/ordercompleteicon.svg"
 import { ReactComponent as Messages } from "./images/Messages.svg";
 import { ReactComponent as Email } from "./images/email.svg";
 import { ReactComponent as Call } from "./images/call.svg";
+import { ReactComponent as Location } from "./images/location.svg";
 import AuthNavbar2 from "../../components/AuthNavbar2/authNavbar2";
 
 const CustomerDashboard = () => {
@@ -130,7 +131,7 @@ const CustomerDashboard = () => {
                 <p>08099776655, 07099664422</p>
               </div>
               <div className="contactus-icon">
-                {/* <Location className="icon" /> */}
+                <Location className="icon" />
                 <p>25, Adetola street, Ikoyi, Lagos</p>
               </div>
             </div>

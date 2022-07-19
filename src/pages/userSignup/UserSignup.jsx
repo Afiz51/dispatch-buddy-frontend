@@ -5,6 +5,7 @@ import SignUpForm from "../../components/common/SignUpFrontEnd";
 import logo from "./images/logo.svg";
 import "./userSignup.css";
 import Axios from "axios";
+import { toast } from "react-toastify";
 
 const UserSignup = (props) => {
   const [email, setEmail] = useState("");
@@ -12,20 +13,31 @@ const UserSignup = (props) => {
   const [name, setName] = useState("");
   const [phoneNum, setPhoneNum] = useState("");
   const [address, setAddress] = useState("");
+
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    console.log("clicked", email, password);
-    Axios.post("https://dispatch-buddy.herokuapp.com/api-docs/", {
-      name: name,
-      phoneNum: phoneNum,
-      email: email,
-      password: password,
-      user_type: "shipper",
-      address: address,
-    }).then((response) => {
-      console.log(response);
-    });
-    window.location.replace("/verify-email");
+    console.log("clicked", email, password, name, phoneNum, address);
+    Axios.post(
+      "https://dispatch-buddy-api.herokuapp.com/api/v1/auth/user/create",
+      {
+        name: name,
+        phoneNum: phoneNum,
+        email: email,
+        password: password,
+        user_type: "shipper",
+        address: address,
+      }
+    )
+      .then((response) => {
+        if (response.status === 201) {
+          toast.success(response.data.msg);
+        }
+        console.log(response);
+      })
+      .catch((error) => {
+        if (error) toast("An error occured");
+      });
+    // window.location.replace("/user/verify");
   };
   return (
     <>
@@ -56,36 +68,35 @@ const UserSignup = (props) => {
                 icon="email-icon"
                 placeholder="Enter your name"
                 type="text"
-                onChange={({ target }) => setName(target.value)}
+                setName={setName}
               />
               <label>Email</label>
               <SignUpForm
                 icon="email-icon"
                 placeholder="Enter your email"
                 type="email"
-                value={email}
-                onChange={({ target }) => setEmail(target.value)}
+                setName={setEmail}
               />
               <label>Phone Number</label>
               <SignUpForm
                 icon="email-icon"
                 placeholder="Enter your phone number"
                 type="phone"
-                onChange={({ target }) => setPhoneNum(target.value)}
+                setName={setPhoneNum}
               />
               <label>Password</label>
               <SignUpForm
                 icon="password-icon"
                 placeholder="Enter your password"
                 type="password"
-                onChange={({ target }) => setPassword(target.value)}
+                setName={setPassword}
               />
               <label>Address</label>
               <SignUpForm
                 icon="password-icon"
                 placeholder="Enter your address"
                 type="text"
-                onChange={({ target }) => setAddress(target.value)}
+                setName={setAddress}
               />
               <button
                 className="signup-btn"
