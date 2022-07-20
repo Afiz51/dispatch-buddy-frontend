@@ -3,7 +3,8 @@ import axios from "axios";
 import "./forgotPassword.css";
 import { Link } from "react-router-dom";
 
-const url = "http://localhost:3000/api/v1/auth/user/forgot-password";
+const url =
+  "https://dispatch-buddy-api.herokuapp.com/api/v1/auth/user/forgot-password";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
