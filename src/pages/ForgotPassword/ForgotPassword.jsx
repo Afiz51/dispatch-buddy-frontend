@@ -12,6 +12,9 @@ const ForgotPassword = () => {
   const forgotPassword = async () => {
     const response = await axios.post(url, { email: email });
     console.log(response);
+    if (response.status === 200) {
+      window.location.replace("/password-link");
+    }
   };
 
   const handleSubmit = (e) => {
@@ -19,7 +22,6 @@ const ForgotPassword = () => {
     forgotPassword();
     console.log(email);
     setEmail("");
-    // window.location.replace("/password-link");
   };
 
   return (
