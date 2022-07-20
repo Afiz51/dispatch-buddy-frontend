@@ -2,25 +2,36 @@ import React from "react";
 import "./style.css";
 import logo from "../../pages/LandingPage/images/logo.png";
 import MB from "./images/Mb2.jpeg";
+import { Link } from "react-router-dom";
 
 const AuthNavbar = () => {
+  const user = JSON.parse(localStorage.getItem("user"));
+
   return (
     <div className="auth-navbar">
       <div className="auth-nav-left">
         <img src={logo} alt="" />
-        <p style={{ fontWeight: 800, paddingLeft: 0 }}>Dispatch <br /> Buddy</p>
+        <p style={{ fontWeight: 800, paddingLeft: 0 }}>
+          Dispatch <br /> Buddy
+        </p>
       </div>
 
       <div className="navbar-links">
         <ul>
-          <li>Bidding</li>
-          <li>Ride History</li>
-          <li>Earnings</li>
+          <li>
+            <Link to="/allincomingrequest">Bidding</Link>
+          </li>
+          <li>
+            <Link to="/rider-history">Ride History</Link>
+          </li>
+          <li>
+            <Link to="/rider-earnings">Earnings</Link>
+          </li>
           <li>Availability</li>
           <li>
             <label class="switch">
-                <input type="checkbox"/>
-                <span class="slider round"></span>
+              <input type="checkbox" />
+              <span class="slider round"></span>
             </label>
           </li>
         </ul>
@@ -42,7 +53,7 @@ const AuthNavbar = () => {
         </span>
         <img src={MB} alt="profile" />
         <span>
-          <h4>Babatunde</h4>
+          <h4>{user.user.name}</h4>
         </span>
       </div>
     </div>

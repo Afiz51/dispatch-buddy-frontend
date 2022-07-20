@@ -6,6 +6,7 @@ import "./usersignin.css";
 import Axios from "axios";
 import LeftImage from "../../components/LeftImage";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const UserSignin = () => {
   const [email, setEmail] = useState("");
@@ -21,19 +22,26 @@ const UserSignin = () => {
         email: email,
         password: password,
       }
-    ).then((response) => {
-      if (response.data.user) {
-        localStorage.setItem("user", JSON.stringify(response.data));
-      }
-      const userType = response.data.user.user_type;
+    )
+      .then((response) => {
+        if (response.data.user) {
+          localStorage.setItem("user", JSON.stringify(response.data));
+        }
+        const userType = response.data.user.user_type;
 
-      if (userType === "shipper") {
-        navigate("/customerdashboard");
-      }
-      if (userType === "rider") {
-        navigate("/oneincomingrequest");
-      }
-    });
+        if (userType === "shipper") {
+          navigate("/customerdashboard");
+        }
+        if (userType === "rider") {
+          navigate("/oneincomingrequest");
+        }
+      })
+      .catch((error) => {
+        if (error) {
+          toast.error(error.response.data.msg);
+          console.log(error);
+        }
+      });
   };
 
   return (
@@ -62,7 +70,12 @@ const UserSignin = () => {
           type="password"
           setName={setPassword}
         />
-        <button className="signup-btn" type="button" onClick={handleFormSubmit}>
+        <button
+          style={{ width: "100%" }}
+          className="signup-btn"
+          type="button"
+          onClick={handleFormSubmit}
+        >
           Login
         </button>
         <p>

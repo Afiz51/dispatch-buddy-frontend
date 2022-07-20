@@ -24,25 +24,32 @@ const onSubmit = (values, actions) => {
   Axios.post(
     "https://dispatch-buddy-api.herokuapp.com/api/v1/auth/user/create",
     formData
-  ).then((response) => {
-    actions.resetForm();
-    console.log(response);
-    if (response.status === 201) {
-      toast(response.data.msg, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-      <>
-        <ToastContainer />
-        <Link to="/user-signin" />
-      </>;
-    }
-  });
+  )
+    .then((response) => {
+      actions.resetForm();
+      console.log(response);
+      if (response.status === 201) {
+        toast(response.data.msg, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        <>
+          <ToastContainer />
+          <Link to="/user-signin" />
+        </>;
+      }
+    })
+    .catch((error) => {
+      if (error) {
+        toast.error(error.response.data.msg);
+        console.log(error.response.data);
+      }
+    });
 };
 
 const RiderSignup = () => {
