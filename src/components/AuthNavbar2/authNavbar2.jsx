@@ -3,6 +3,7 @@ import "./authNavbar2.css";
 import logo from "../../pages/LandingPage/images/logo.png";
 import MB from "./images/Mb2.jpeg";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 const AuthNavbar2 = () => {
   const handleLogout = () => {
@@ -12,7 +13,13 @@ const AuthNavbar2 = () => {
 
   const user = JSON.parse(localStorage.getItem("user"));
 
-  console.log(user.user.name);
+  if (!user || user.user.user_type !== "shipper") {
+    window.location.replace("/user-signin");
+  }
+  useEffect(() => {
+    console.log(user.user.name);
+  }, []);
+
   return (
     <div className="auth-navbar">
       <div className="auth-nav-left">
@@ -25,7 +32,7 @@ const AuthNavbar2 = () => {
       <div className="navbar-links">
         <ul>
           <li>
-            <Link to="/customerdashboard">My Orders</Link>
+            <Link to="/shipperridehistory">My Orders</Link>
           </li>
           <li>
             <Link to="/payment-option">Payment</Link>

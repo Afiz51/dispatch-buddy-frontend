@@ -1,13 +1,12 @@
-import React from 'react'
-import RequestAcceptedModal from '../../components/RequestAccepedModal'
+import React from "react";
+import IncomingRequestModal from "../../components/IncomingRequestModal";
 
 const PlayGround = () => {
   return (
     <div>
-        <RequestAcceptedModal />
-
+      <IncomingRequestModal />
     </div>
-  )
-}
+  );
+};
 
-export default PlayGround
+export default PlayGround;

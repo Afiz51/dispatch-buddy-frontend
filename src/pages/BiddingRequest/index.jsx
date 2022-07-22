@@ -5,68 +5,91 @@ import BiddingCard from "../../components/BiddingCard";
 import { useEffect, useState } from "react";
 import Axios from "axios";
 import RequestAcceptedModal from "../../components/RequestAccepedModal";
+import { useNavigate } from "react-router-dom";
 
 const BiddingRequest = () => {
   const [biddingRequest, setBiddingRequest] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     Axios.get("https://dispatch-buddy-api.herokuapp.com/api/v1/rider/requests")
       .then((res) => {
-        console.log(res.data);
         setBiddingRequest(res.data);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [isOpen]);
+
+  const user = JSON.parse(localStorage.getItem("user"));
 
   const acceptRequest = async (id) => {
     const response = await Axios.patch(
       `https://dispatch-buddy-api.herokuapp.com/api/v1/rider/accept-request`,
       {
         id: id,
+        riderId: user.user.userId,
       }
     );
     console.log(response);
     setIsOpen(true);
-  }
+    navigate(`/endtrip/${id}`);
+  };
 
-  const arr = Array.isArray(biddingRequest.orders) ? biddingRequest.orders.map((item, index) => {
-    return (
-      <BiddingCard key={index}>
-        <div className="pickup-loaction">
-          <h3>Pickup location</h3>
-          <p>{item.pickupLocation}</p>
-        </div>
+  const arr = Array.isArray(biddingRequest.orders)
+    ? biddingRequest.orders.map((item, index) => {
+        return (
+          <div
+            className={
+              item.orderStatus === "Accepted"
+                ? "bidding-accepted"
+                : "biddingdisabled"
+            }
+          >
+            <BiddingCard key={index}>
+              <div className="pickup-loaction">
+                <h3>Pickup location</h3>
+                <p>{item.pickupLocation}</p>
+              </div>
 
-        <div className="delivery-location">
-          <h3>Delivery location</h3>
-          <p>{item.dropOffLocation}</p>
-        </div>
+              <div className="delivery-location">
+                <h3>Delivery location</h3>
+                <p>{item.dropOffLocation}</p>
+              </div>
 
-        <div className="package-details">
-          <h3>Package</h3>
-          <p>New Hp core i7 Laptop (fully packed)</p>
-        </div>
+              <div className="package-details">
+                <h3>Package</h3>
+                <p>New Hp core i7 Laptop (fully packed)</p>
+              </div>
 
-        <div className="drop-off-contact">
-          <h3>Offer</h3>
-          <p>{item.amount}</p>
-        </div>
+              <div className="drop-off-contact">
+                <h3>Offer</h3>
+                <p>{item.amount}</p>
+              </div>
 
-        <div className="package-details">
-          <h3>Payment method</h3>
-          <p>Cash</p>
-        </div>
+              <div className="package-details">
+                <h3>Payment method</h3>
+                <p>Cash</p>
+              </div>
 
-        <div className="btn-contain">
-          <button className="accept-req " onClick={() => acceptRequest(item._id)}>Accept Request</button>
-          <RequestAcceptedModal open={isOpen} onClose={() => setIsOpen(false)} />
-          <br />
-          <button className="decline-req">Decline Request</button>
-        </div>
-      </BiddingCard>
-    );
-  }) : [];
+              <div className="btn-contain">
+                <button
+                  className="accept-req "
+                  onClick={() => acceptRequest(item._id)}
+                >
+                  Accept Request
+                </button>
+                <RequestAcceptedModal
+                  open={isOpen}
+                  onClose={() => setIsOpen(false)}
+                />
+                <br />
+                <button className="decline-req">Decline Request</button>
+              </div>
+            </BiddingCard>
+          </div>
+        );
+      })
+    : [];
 
   return (
     <>
@@ -96,9 +119,7 @@ const BiddingRequest = () => {
             </div>
           </div>
 
-          <div className="bidding-children">
-            {arr}
-          </div>
+          <div className="bidding-children">{arr}</div>
         </div>
       </div>
     </>

@@ -1,16 +1,71 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import "./style.css";
 import AuthNavbar from "../../components/AuthNavbar";
 import { ReactComponent as Mastercard } from "./images/Mastercard.svg";
-// import IncomingRequestModal from "../../components/IncomingRequestModal";
-// import RequestAcceptedModal from "../../components/RequestAccepedModal";
+import { useEffect, useState } from "react";
+import Axios from "axios";
+import RequestAcceptedModal from "../../components/RequestAccepedModal";
+import IncomingRequestModal from "../../components/IncomingRequestModal";
+import { useNavigate } from "react-router-dom";
+//import OrderCompletedModal from "../../components/OrderCompletedModal";
 
 const AcceptOneRequest = () => {
+  const [orders, setOrders] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
+  const [distanceTime, setDistanceTime] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    Axios.get("https://dispatch-buddy-api.herokuapp.com/api/v1/rider/requests")
+      .then((res) => {
+        const pendingOrders = res.data.orders.filter(function (item) {
+          return item.orderStatus === "Pending";
+        });
+        console.log(orders);
+        setOrders(pendingOrders[0]);
+        console.log(pendingOrders[0]);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  localStorage.setItem("pickupLocation", orders.pickupLocation);
+  localStorage.setItem("dropOffLocation", orders.dropOffLocation);
+
+  const pickupLocation = localStorage.getItem("pickupLocation");
+  const dropOffLocation = localStorage.getItem("dropOffLocation");
+
+  const handleDistance = async () => {
+    const response = await Axios.post(
+      `https://dispatch-buddy-api.herokuapp.com/api/v1/distance/diff/`,
+      {
+        pickupLocation: pickupLocation,
+        dropOffLocation: dropOffLocation,
+      }
+    );
+    setDistanceTime(response.data);
+  };
+
+  useEffect(() => {
+    handleDistance();
+  }, []);
+
+  const user = JSON.parse(localStorage.getItem("user"));
+  const acceptRequest = async (id) => {
+    // eslint-disable-next-line no-unused-vars
+    const response = await Axios.patch(
+      `https://dispatch-buddy-api.herokuapp.com/api/v1/rider/accept-request`,
+      {
+        id: id,
+        riderId: user.user.userId,
+      }
+    );
+    setIsOpen(true);
+    navigate(`/endtrip/${orders._id}`);
+  };
+
   return (
     <>
-      {/* <IncomingRequestModal /> */}
-      {/* <RequestAcceptedModal /> */}
-
       <AuthNavbar />
       <div className="acceptone-container">
         <div className="accept-one-left">
@@ -18,12 +73,12 @@ const AcceptOneRequest = () => {
             <h4>Request details</h4>
             <div className="pickup-loaction">
               <h3>Pickup location</h3>
-              <p>5, Akintayo Street, Victoria Island, Lagos</p>
+              <p>{orders.pickupLocation}</p>
             </div>
 
             <div className="delivery-location">
               <h3>Delivery location</h3>
-              <p>89B, Olumakinde Street, Lekki, Lagos</p>
+              <p>{orders.dropOffLocation}</p>
             </div>
 
             <div className="package-details">
@@ -34,12 +89,12 @@ const AcceptOneRequest = () => {
             <div className="drop-off-contact">
               <h3>Drop off Contact</h3>
               <p>Tomiwa Olatunde</p>
-              <p>08099446672</p>
+              <p>{orders.dropOffPhoneNumber}</p>
             </div>
 
             <div className="payment-method">
               <h3>Payment method</h3>
-              <p>N3,500 </p>
+              <p>{orders.amount}</p>
               <div className="sub-payment">
                 <div className="card-payment">
                   <input
@@ -55,14 +110,29 @@ const AcceptOneRequest = () => {
             </div>
 
             <div className="btn-container">
-              <button className="accept-request">Accept Request</button>
+              <button
+                className="accept-request"
+                onClick={() => acceptRequest(orders._id)}
+              >
+                Accept Request
+              </button>
+              <RequestAcceptedModal
+                open={isOpen}
+                onClose={() => setIsOpen(false)}
+              />
               <br />
               <button className="decline-request">Decline Request</button>
             </div>
           </div>
         </div>
 
-        <div className="accept-one-right"></div>
+        <div className="accept-one-right">
+          <IncomingRequestModal
+            distance={distanceTime.distance}
+            time={distanceTime.estimatedTime}
+            pickupLoc={orders.pickupLocation}
+          />
+        </div>
       </div>
     </>
   );
