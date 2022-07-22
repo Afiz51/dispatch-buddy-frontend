@@ -18,6 +18,7 @@ const AuthNavbar2 = () => {
   }
   useEffect(() => {
     console.log(user.user.name);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
