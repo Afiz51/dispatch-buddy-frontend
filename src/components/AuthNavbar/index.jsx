@@ -24,6 +24,7 @@ const AuthNavbar = () => {
 
       <div className="navbar-links">
         <ul>
+          <Link to="/oneincomingrequest">Home</Link>
           <Link to="/allincomingrequest">
             <li>Bidding</li>
           </Link>
@@ -36,9 +37,9 @@ const AuthNavbar = () => {
           <li>Availability</li>
           <li onClick={handleLogout}>Logout</li>
           <li>
-            <label class="switch">
+            <label className="switch">
               <input type="checkbox" />
-              <span class="slider round"></span>
+              <span className="slider round"></span>
             </label>
           </li>
         </ul>
