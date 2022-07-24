@@ -25,6 +25,8 @@ const ShipperRideHistory = () => {
   useEffect(() => {
     getAllOrders();
     console.log("order: ", orders);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const ordersArray = Array.isArray(orders)
