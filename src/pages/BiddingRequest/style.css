@@ -1,29 +1,29 @@
-.container{
+.container {
   display: flex;
   width: 100%;
-  background-color: #E5E5E5;
+  background-color: #e5e5e5;
   height: 100%;
   /* overflow:scroll; */
   /* white-space:nowrap; */
 }
 
-.all-bidding{
-  background: #FFFFFF;
+.all-bidding {
+  background: #ffffff;
   width: 90%;
   height: 100vh;
   margin: auto auto;
   /* height: 100%; */
-  overflow:scroll;
+  overflow: scroll;
 }
 
-.bidding-head > h2{
+.bidding-head > h2 {
   margin-left: 95px;
-  margin-top:30px;
-  color:#21334F;
+  margin-top: 30px;
+  color: #21334f;
 }
 
-.head-status{
-  background: #FCC1341A;
+.head-status {
+  background: #fcc1341a;
   height: 42px;
   width: 1100px;
   margin: auto auto;
@@ -32,11 +32,11 @@
   padding-left: 30px;
 }
 
-.head-status p{
+.head-status p {
   margin-left: 10px;
 }
 
-.bidding-children{
+.bidding-children {
   display: flex;
   width: 100%;
   justify-content: center;
@@ -44,42 +44,45 @@
   flex-wrap: wrap;
 }
 
-.bidding-children h3{
-  color: #C4C4C4;
+.bidding-children h3 {
+  color: #c4c4c4;
   font-weight: 400;
   font-size: 16px;
 }
 
 .bidding-children p {
-  color: #21334F;
+  color: #21334f;
   font-size: 14px;
   font-weight: 600;
   line-height: 20px;
 }
 
-.btn-contain{
- 
+.btn-contain {
   flex-direction: column;
-  margin:0 auto;
+  margin: 0 auto;
 }
 
-.accept-req{
-  background: #E02B451A;
-  color: #E02B45;
+.accept-req {
+  background: #e02b451a;
+  color: #e02b45;
   width: 100%;
   border: none;
   height: 40px;
-  font-weight:600;
+  font-weight: 600;
   font-size: 14px;
   margin-top: 20px;
   cursor: pointer;
 }
 
-.decline-req{
-  background: #FFFFFF;
-  color: #21334F;
+.decline-req {
+  background: #ffffff;
+  color: #21334f;
   width: 100%;
   border: none;
   margin-top: 12px;
   cursor: pointer;
+}
+
+.bidding-accepted {
+  display: none;
 }

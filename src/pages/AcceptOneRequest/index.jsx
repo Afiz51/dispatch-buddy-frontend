@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import "./style.css";
 import AuthNavbar from "../../components/AuthNavbar";
@@ -27,6 +26,7 @@ const AcceptOneRequest = () => {
         console.log(pendingOrders[0]);
       })
       .catch((err) => console.log(err));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   localStorage.setItem("pickupLocation", orders.pickupLocation);
@@ -48,6 +48,7 @@ const AcceptOneRequest = () => {
 
   useEffect(() => {
     handleDistance();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const user = JSON.parse(localStorage.getItem("user"));

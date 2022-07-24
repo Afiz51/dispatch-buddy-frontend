@@ -1,93 +1,94 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .body-container {
-    background: #E5E5E5;
+  background: #e5e5e5;
 }
 
 .Rider-header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    margin-top: 100px;
-    padding: 37px 250px 0px 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 100px;
+  padding: 37px 150px 0px 5px;
 }
 
 .wrapped-header {
-    background: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 600px;
-    height: 580px;
-    margin-left: 400px;
+  background: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 600px;
+  height: 780px;
+  margin-left: 400px;
+  margin-bottom: 250px;
 }
 
 .left-arrow {
-    display: flex;
-    flex-direction: row;
-    padding-left: 5px;
+  display: flex;
+  flex-direction: row;
+  padding-left: 5px;
 }
 
 .left-arrow > p {
-    margin-left: 15px;
+  margin-left: 15px;
 }
 
 .center-header > h3 {
-    color: #21334F;
-    font-weight: 700;
-    font-size: 18px;
-    line-height: 17px;
-    margin-left: 20px;
+  color: #21334f;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 17px;
+  margin-left: 20px;
 }
 
 hr.rider-line {
-    width: 90%;
-    margin-left: 25px;
-    border-top: 1px solid #E2E2E2;
+  width: 90%;
+  margin-left: 25px;
+  border-top: 1px solid #e2e2e2;
 }
 
-
 .request-form-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  padding-bottom: 100px;
 }
 
 .request-input {
-    width: 350px;
-    height: 50px;
-    border: 1px solid #E2E2E2;
+  width: 350px;
+  height: 50px;
+  border: 1px solid #e2e2e2;
 }
 
 .rider-request-btn {
-    width: 350px;
-    height: 50px;
-    background: #E02B45;
-    color: white;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 17px;
-    border: none;
+  width: 350px;
+  height: 50px;
+  background: #e02b45;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  border: none;
 }
 
 input[type="text"].request-input::placeholder {
-    color: #C4C4C4;
-    margin-left: 180px;
-    text-align: center;
+  color: #c4c4c4;
+  margin-left: 180px;
+  text-align: center;
 }
 
 input[type="phone"].request-input::placeholder {
-    color: #C4C4C4;
-    margin-left: 140px;
-    text-align: center;
+  color: #c4c4c4;
+  margin-left: 140px;
+  text-align: center;
 }
 
 input[type="digit"].request-input::placeholder {
-    color: #C4C4C4;
-    margin-left: 220px;
-    text-align: center;
+  color: #c4c4c4;
+  margin-left: 220px;
+  text-align: center;
 }

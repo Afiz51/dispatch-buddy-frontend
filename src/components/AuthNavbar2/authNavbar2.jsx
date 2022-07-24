@@ -32,6 +32,9 @@ const AuthNavbar2 = () => {
 
       <div className="navbar-links">
         <ul>
+          <Link to="/customerdashboard">
+            <li>Home</li>
+          </Link>
           <li>
             <Link to="/shipperridehistory">My Orders</Link>
           </li>

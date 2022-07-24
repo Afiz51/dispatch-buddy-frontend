@@ -28,7 +28,7 @@ const AuthNavbar = () => {
             <li>Bidding</li>
           </Link>
           <Link to="/rider-history">
-            <li>Ride History</li>
+            <li style={{ width: 70 }}>Ride History</li>
           </Link>
           <Link to="/rider-earnings">
             <li>Earnings</li>
