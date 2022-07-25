@@ -22,7 +22,7 @@ function IncomingRequestModal({ distance, time, pickupLoc }) {
             <h1>
               {time} . {distance} .
             </h1>
-            <h4>Collins Nwachukwu</h4>
+            <h4>Gboyega Lawal</h4>
             <p style={{ width: "60%" }}>{pickupLoc}</p>
           </div>
         </div>
