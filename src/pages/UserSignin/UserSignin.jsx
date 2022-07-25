@@ -57,12 +57,7 @@ const UserSignin = () => {
         </div>
         <h2>Login</h2>
         <label>Email</label>
-        <SignUpForm
-          icon="email-icon"
-          placeholder="Enter your email"
-          type="email"
-          setName={setEmail}
-        />
+        <SignUpForm icon="email-icon" type="email" setName={setEmail} />
         <label>Password</label>
         <SignUpForm
           icon="password-icon"

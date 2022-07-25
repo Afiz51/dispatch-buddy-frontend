@@ -71,12 +71,7 @@ const UserSignup = (props) => {
                 setName={setName}
               />
               <label>Email</label>
-              <SignUpForm
-                icon="email-icon"
-                placeholder="Enter your email"
-                type="email"
-                setName={setEmail}
-              />
+              <SignUpForm icon="email-icon" type="email" setName={setEmail} />
               <label>Phone Number</label>
               <SignUpForm
                 icon="email-icon"
@@ -87,7 +82,6 @@ const UserSignup = (props) => {
               <label>Password</label>
               <SignUpForm
                 icon="password-icon"
-                placeholder="Enter your password"
                 type="password"
                 setName={setPassword}
               />
