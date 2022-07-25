@@ -37,9 +37,10 @@ const ShipperRideHistory = () => {
               <p>{order.dropOffLocation}</p>
               <p className="content-amount">{order.amount}</p>
               <p className="content-datetime">
-                {new Date(order.createdAt).toDateString() +
-                  " " +
-                  new Date(order.createdAt).toLocaleTimeString()}
+                {new Date(order.startTrip).toDateString() + ", "}
+                {new Date(order.startTrip).toLocaleTimeString("en-GB", {
+                  timeZone: "UTC",
+                })}
               </p>
               <p className="content-status">{order.orderStatus}</p>
             </div>

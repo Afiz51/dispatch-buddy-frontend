@@ -31,7 +31,12 @@ const RiderHistory = () => {
             <div className="row1">
               <p className="location-parag">{item.dropOffLocation}</p>
               <p className="contact">{item.dropOffPhoneNumber}</p>
-              <p className="date-time">June,Mon 5, 2022 4:15 PM</p>
+              <p className="date-time">
+                {new Date(item.startTrip).toDateString() + ", "}
+                {new Date(item.startTrip).toLocaleTimeString("en-GB", {
+                  timeZone: "UTC",
+                })}
+              </p>
               <p className="status-pending">{item.orderStatus}</p>
             </div>
             <hr className="demacated-line" />

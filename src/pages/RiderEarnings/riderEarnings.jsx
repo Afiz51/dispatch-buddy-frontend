@@ -32,7 +32,10 @@ const RiderEarnings = () => {
           <div key={index} className="earnings-group">
             <div className="earnings-group-inner">
               <p className="earnings-right">
-                <strong>Today</strong>, 10:15AM
+                {/* <strong>Today</strong>, 10:15AM */}
+                {new Date(item.startTrip).toDateString() + ", "}
+                {new Date(item.startTrip).toLocaleTimeString()}
+                {}
               </p>
               <div className="earnings-left">
                 <input
@@ -71,7 +74,7 @@ const RiderEarnings = () => {
               </div>
               <div className="time-div">
                 <img src={time} alt="" className="img-time" />
-                <p>890hrs . 20mins</p>
+                <p>{earning.totalTime} mins</p>
               </div>
             </div>
           </div>

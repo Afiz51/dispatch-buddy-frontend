@@ -37,8 +37,7 @@ const RequestAcceptedModal = ({ open, onClose, orderId }) => {
           <Successful />
           <h2>Request Accepted</h2>
           <p>
-            You’ve accepted to pick up <strong>Collins Nwachukwu</strong>{" "}
-            request.
+            You’ve accepted to pick up <strong>Gboyega Lawal</strong> request.
           </p>
           <button
             className="btn"
