@@ -11,13 +11,13 @@ const AuthNavbar2 = () => {
     window.location.replace("/user-signin");
   };
 
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = "user";
 
-  if (!user || user.user.user_type !== "shipper") {
-    window.location.replace("/user-signin");
-  }
+  // if (!user || user.user.user_type !== "shipper") {
+  //   window.location.replace("/user-signin");
+  // }
   useEffect(() => {
-    console.log(user.user.name);
+    // console.log(user.user.name);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -60,9 +60,7 @@ const AuthNavbar2 = () => {
           </svg>
         </span>
         <img src={MB} alt="profile" />
-        <span>
-          <h4>{user.user.name}</h4>
-        </span>
+        <span>{/* <h4>{user.user.name}</h4> */}</span>
       </div>
     </div>
   );

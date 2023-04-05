@@ -1,6 +1,6 @@
 import { useState } from "react";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SignUpForm from "../../components/common/SignUpFrontEnd";
 import logo from "./images/logo.svg";
 import "./userSignup.css";
@@ -14,29 +14,32 @@ const UserSignup = (props) => {
   const [phoneNum, setPhoneNum] = useState("");
   const [address, setAddress] = useState("");
 
+  const navigate = useNavigate();
+
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    console.log("clicked", email, password, name, phoneNum, address);
-    Axios.post(
-      "https://dispatch-buddy-api.herokuapp.com/api/v1/auth/user/create",
-      {
-        name: name,
-        phoneNum: phoneNum,
-        email: email,
-        password: password,
-        user_type: "shipper",
-        address: address,
-      }
-    )
-      .then((response) => {
-        if (response.status === 201) {
-          toast.success(response.data.msg);
-        }
-        console.log(response);
-      })
-      .catch((error) => {
-        if (error) toast("An error occured");
-      });
+    // console.log("clicked", email, password, name, phoneNum, address);
+    navigate("/customerdashboard");
+    // Axios.post(
+    //   "https://dispatch-buddy-api.herokuapp.com/api/v1/auth/user/create",
+    //   {
+    //     name: name,
+    //     phoneNum: phoneNum,
+    //     email: email,
+    //     password: password,
+    //     user_type: "shipper",
+    //     address: address,
+    //   }
+    // )
+    //   .then((response) => {
+    //     if (response.status === 201) {
+    //       toast.success(response.data.msg);
+    //     }
+    //     console.log(response);
+    //   })
+    //   .catch((error) => {
+    //     if (error) toast("An error occured");
+    //   });
     // window.location.replace("/user/verify");
   };
   return (

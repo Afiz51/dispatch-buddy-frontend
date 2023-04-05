@@ -20,21 +20,21 @@ const CustomerDashboard = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [orderId, setOrderId] = useState();
 
-  useEffect(() => {
-    Axios.get(
-      `https://dispatch-buddy-api.herokuapp.com/api/v1/order/shipper-orders/${currentLoggedInUser.user.userId}`
-    )
-      .then((res) => {
-        setShipperOrder(res.data);
-        const completeOrder = res.data.orders.filter(function (item) {
-          return item.orderStatus === "Delivered";
-        });
-        setCompletedOrder(completeOrder.length);
-      })
+  // useEffect(() => {
+  //   Axios.get(
+  //     `https://dispatch-buddy-api.herokuapp.com/api/v1/order/shipper-orders/${currentLoggedInUser.user.userId}`
+  //   )
+  //     .then((res) => {
+  //       setShipperOrder(res.data);
+  //       const completeOrder = res.data.orders.filter(function (item) {
+  //         return item.orderStatus === "Delivered";
+  //       });
+  //       setCompletedOrder(completeOrder.length);
+  //     })
 
-      .catch((err) => console.log(err));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  //     .catch((err) => console.log(err));
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   const closeModal = () => {
     setIsOpen(false);

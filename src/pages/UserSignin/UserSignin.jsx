@@ -15,33 +15,33 @@ const UserSignin = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
+    navigate("/customerdashboard");
+    // Axios.post(
+    //   "https://dispatch-buddy-api.herokuapp.com/api/v1/auth/user/login",
+    //   {
+    //     email: email,
+    //     password: password,
+    //   }
+    // )
+    //   .then((response) => {
+    //     if (response.data.user) {
+    //       localStorage.setItem("user", JSON.stringify(response.data));
+    //     }
+    //     const userType = response.data.user.user_type;
 
-    Axios.post(
-      "https://dispatch-buddy-api.herokuapp.com/api/v1/auth/user/login",
-      {
-        email: email,
-        password: password,
-      }
-    )
-      .then((response) => {
-        if (response.data.user) {
-          localStorage.setItem("user", JSON.stringify(response.data));
-        }
-        const userType = response.data.user.user_type;
-
-        if (userType === "shipper") {
-          navigate("/customerdashboard");
-        }
-        if (userType === "rider") {
-          navigate("/oneincomingrequest");
-        }
-      })
-      .catch((error) => {
-        if (error) {
-          toast.error(error.response.data.msg);
-          console.log(error);
-        }
-      });
+    //     if (userType === "shipper") {
+    //       navigate("/customerdashboard");
+    //     }
+    //     if (userType === "rider") {
+    //       navigate("/oneincomingrequest");
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     if (error) {
+    //       toast.error(error.response.data.msg);
+    //       console.log(error);
+    //     }
+    //   });
   };
 
   return (
